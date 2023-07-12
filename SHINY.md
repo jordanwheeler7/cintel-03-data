@@ -54,14 +54,14 @@ Login to [shinyapps.io](https://www.shinyapps.io/) to retrieve the values (you c
 
 See the earlier [SHINYAPPS.md](https://github.com/denisecase/cintel-02-app/blob/main/SHINYAPPS.md) for details.
 
-- Name: SHINYAPPS_ACCOUNT
-- Secret: jordan-wheeler7
+-Name: SHINYAPPS_TOKEN
+-Secret: (paste the token from shinyapps.io)
 
-- Name: SHINYAPPS_TOKEN
-- Secret: 1B68863C14983310135E7F9E28A048FB
+-Name: SHINYAPPS_SECRET
+-Secret: (paste the secret from shinyapps.io)
 
-- Name: SHINYAPPS_SECRET
-- Secret: YtlBe4OThDUE0KDVXscw0g1LP3MF2A/Lsz2S4qAx
+-Name: SHINYAPPS_ACCOUNT
+-Secret: Paste or type your shinyapps.io account name.
 
 
 -----
