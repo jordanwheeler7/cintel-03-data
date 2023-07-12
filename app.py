@@ -24,19 +24,19 @@ from util_logger import setup_logger
 logger, logname = setup_logger(__name__)
 
 app_ui = ui.page_navbar(
-    shinyswatch.theme.lumen(),
+    shinyswatch.theme.vapor(),
     ui.nav(
         "Home",
         ui.layout_sidebar(
             ui.panel_sidebar(
-                ui.h2("Sidebar Panel"),
+                ui.h2("Input Area"),
                 ui.tags.hr(),
                 ui.h3("User Interaction Here"),
-                ui.input_text("name_input", "Enter your name", placeholder="Your Name"),
+                ui.input_text("name_input", "What's your name?", placeholder="Your Name"),
                 ui.input_text(
-                    "language_input",
-                    "Enter your favorite language(s)",
-                    placeholder="Favorite Programming Language(s)",
+                    "sport_input",
+                    "Enter your favorite sport(s)",
+                placeholder="Eat 'em Up, Eat 'em Up, KSU!",
                 ),
                 ui.tags.hr(),
             ),
@@ -52,7 +52,7 @@ app_ui = ui.page_navbar(
                     ),
                 ),
                 ui.tags.hr(),
-                ui.h2("Main Panel with Reactive Output"),
+                ui.h2("Reactive Output"),
                 ui.tags.hr(),
                 ui.output_text_verbatim("welcome_output"),
                 ui.output_text_verbatim("insights_output"),
@@ -74,6 +74,13 @@ app_ui = ui.page_navbar(
             get_penguins_outputs(),
         ),
     ),
+    ui.nav(
+        "Iris",
+        ui.layout_sidebar(
+            get_iris_inputs(),
+            get_iris_outputs(),
+        ),
+    )
     ui.nav(ui.a("About", href="https://github.com/jordanwheeler7")),
     ui.nav(ui.a("GitHub", href="https://github.com/jordanwheeler7/cintel-03-data")),
     ui.nav(ui.a("App", href="https://jordanwheeler7.shinyapps.io/cintel-03-data/")),
@@ -90,15 +97,15 @@ def server(input, output, session):
     @render.text
     def welcome_output():
         user = input.name_input()
-        welcome_string = f"Greetings {user}!"
+        welcome_string = f"Hello, {user}!"
         return welcome_string
 
     @output
     @render.text
     def insights_output():
-        answer = input.language_input()
+        answer = input.sport_input()
         count = len(answer)
-        language_string = f"You like {answer}. That takes {count} characters"
+        language_string = f"You favorite team(s) is/are the {answer}. That takes {count} characters"
         return language_string
 
     get_mtcars_server_functions(input, output, session)
