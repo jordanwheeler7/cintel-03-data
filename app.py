@@ -42,7 +42,7 @@ app_ui = ui.page_navbar(
                     "Enter your favorite sport(s)",
                     placeholder="Eat 'em Up, Eat 'em Up, KSU!",
                 ),
-                ui._input_text("state_input", "Enter your favorite state(s)", placeholder="Kansas"),
+                ui.input_text("state_input", "Enter your favorite state(s)", placeholder="Kansas"),
                 ui.tags.hr(),
             ),
             ui.panel_main(
