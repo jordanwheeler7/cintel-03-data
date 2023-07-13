@@ -19,6 +19,10 @@ from penguins_server import get_penguins_server_functions
 from penguins_ui_inputs import get_penguins_inputs
 from penguins_ui_outputs import get_penguins_outputs
 
+from iris_server import get_iris_server_functions
+from iris_ui_inputs import get_iris_inputs
+from iris_ui_outputs import get_iris_outputs
+
 from util_logger import setup_logger
 
 logger, logname = setup_logger(__name__)
@@ -36,8 +40,9 @@ app_ui = ui.page_navbar(
                 ui.input_text(
                     "sport_input",
                     "Enter your favorite sport(s)",
-                placeholder="Eat 'em Up, Eat 'em Up, KSU!",
+                    placeholder="Eat 'em Up, Eat 'em Up, KSU!",
                 ),
+                ui._input_text("state_input", "Enter your favorite state(s)", placeholder="Kansas"),
                 ui.tags.hr(),
             ),
             ui.panel_main(
@@ -49,6 +54,9 @@ app_ui = ui.page_navbar(
                     ),
                     ui.tags.li(
                         "To explore the Penguins Dataset, click the 'Penguins' tab."
+                    ),
+                    ui.tags.li(
+                        "To explore the Iris Dataset, click the 'Iris' tab."
                     ),
                 ),
                 ui.tags.hr(),
@@ -74,6 +82,13 @@ app_ui = ui.page_navbar(
             get_penguins_outputs(),
         ),
     ),
+    ui.nav(
+        "Iris",
+        ui.layout_sidebar(
+            get_iris_inputs(),
+            get_iris_outputs(),
+        ),
+    ),
     ui.nav(ui.a("About", href="https://github.com/jordanwheeler7")),
     ui.nav(ui.a("GitHub", href="https://github.com/jordanwheeler7/cintel-03-data")),
     ui.nav(ui.a("App", href="https://jordanwheeler7.shinyapps.io/cintel-03-data/")),
@@ -97,13 +112,17 @@ def server(input, output, session):
     @render.text
     def insights_output():
         answer = input.sport_input()
-        count = len(answer)
-        language_string = f"You favorite team(s) is/are the {answer}. That takes {count} characters"
+        answer2 = input.state_input()
+        count = len(answer + answer2)
+        language_string = f"Your favorite team(s) is/are {answer} and your favorite state is {answer2}. That takes {count} characters"
         return language_string
 
-    get_mtcars_server_functions(input, output, session)
-    get_penguins_server_functions(input, output, session)
-   
+    mtcars_functions = get_mtcars_server_functions(input, output, session)
+    penguins_functions = get_penguins_server_functions(input, output, session)
+    iris_functions = get_iris_server_functions(input, output, session)
+    
+    for function in mtcars_functions + penguins_functions + iris_functions:
+        function()
 
 
 app = App(app_ui, server)
