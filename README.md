@@ -1,6 +1,6 @@
 # Continuous Intelligence and Interactive Analytics - Working With Data
 
-- Interactive app: [cintel-03-data](https://jordanwheeler7.shinyapps.io/cintel-03-data/) - see MT Cars tab and Penguins tab
+- Interactive app: [cintel-03-data](https://jordanwheeler7.shinyapps.io/cintel-03-data/) - see MT Cars tab, Penguins tab, and Iris tab.
 - Repository: [cintel-03-data](https://github.com/jordanwheeler7/cintel-03-data)
 - Author: [Jordan Wheeler](https://github.com/jordanwheeler7)
 
