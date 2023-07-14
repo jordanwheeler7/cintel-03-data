@@ -11,10 +11,15 @@ from shiny import render
 import pandas as pd
 import seaborn as sns
 
+from util_logger import setup_logger
+
+logger, logname = setup_logger(__name__)
+
+
 def get_iris_server_functions(input, output, session):
     """Define functions to create UI outputs."""
 
-    path_to_data = pathlib.Path(__file__).parent.joinpath("iris.csv")
+    path_to_data = pathlib.Path(__file__).parent.joinpath("data").joinpath("iris.csv")
     original_df = pd.read_csv(path_to_data)
 
     # Use the len() function to get the number of rows in the DataFrame.
@@ -29,11 +34,16 @@ def get_iris_server_functions(input, output, session):
     @render.text
     def iris_record_count_string():
         message = f"Showing {total_count} records"
+        logger.debug(f"filter message: {message}")
         return message
 
     @output
     @render.plot
     def iris_plot():
+        """
+        Use Seaborn to make a quick scatterplot.
+        Provide a pandas DataFrame and the names of the columns to plot.
+        """
         plt = sns.scatterplot(
             data=original_df,
             x="sepal_length",
@@ -41,7 +51,7 @@ def get_iris_server_functions(input, output, session):
         )
         return plt
 
-    # return a list of function names for use in reactive outputs
+    # Return a list of function names for use in reactive outputs
     return [
         iris_table,
         iris_record_count_string,
