@@ -118,12 +118,9 @@ def server(input, output, session):
         language_string = f"Your favorite team(s) is/are {answer} and your favorite state is {answer2}. That takes {count} characters"
         return language_string
 
-    mtcars_functions = get_mtcars_server_functions(input, output, session)
-    penguins_functions = get_penguins_server_functions(input, output, session)
-    iris_functions = get_iris_server_functions(input, output, session)
+    get_iris_server_functions(input, output, session)
+    get_mtcars_server_functions(input, output, session)
+    get_penguins_server_functions(input, output, session)
     
-    for function in mtcars_functions + penguins_functions + iris_functions:
-        function()
-
-
+           
 app = App(app_ui, server)

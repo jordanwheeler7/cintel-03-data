@@ -52,8 +52,9 @@ def get_iris_server_functions(input, output, session):
         return plt
 
     # Return a list of function names for use in reactive outputs
-    return [
+    functions = [
         iris_table,
         iris_record_count_string,
         iris_plot,
     ]
+    
